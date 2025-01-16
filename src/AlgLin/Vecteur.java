@@ -25,19 +25,19 @@ public class Vecteur extends Matrice {
             throw new IllegalArgumentException("Le fichier ne définit pas un vecteur (une seule colonne attendue).");
         }
     }
-    
+
     // Méthode pour obtenir la taille du vecteur
-    public int getTaille(){
+    public int getTaille() {
         return this.nbLigne();
     }
 
     // Méthode pour obtenir un coefficient du vecteur
-    public double getCoef(int index){
+    public double getCoef(int index) {
         return super.getCoef(index, 0);
     }
-    
+
     // Méthode pour remplacer un coefficient du vecteur
-    public void remplaceCoef(int index, double value){
+    public void remplaceCoef(int index, double value) {
         super.remplaceCoef(index, 0, value);
     }
 
@@ -62,7 +62,7 @@ public class Vecteur extends Matrice {
         }
         return produit;
     }
-    
+
     // Méthode statique pour calculer le produit scalaire de deux vecteurs sans vérification
     public static double produitScalaireSansVerification(Vecteur v1, Vecteur v2) {
         double produit = 0.0;
@@ -110,12 +110,12 @@ public class Vecteur extends Matrice {
         Vecteur v4 = new Vecteur(new double[]{1.0, 2.0});
         System.out.println("Produit scalaire entre v1 et v4 (devrait generer une exception) :");
         try {
-        double produitErreur = produitScalaire(v1, v4);
-        System.out.println("Produit scalaire entre v1 et v4 : " + produitErreur);
-    } catch (IllegalArgumentException e) {
-        System.out.println("Erreur : " + e.getMessage());
-    }
-        
+            double produitErreur = produitScalaire(v1, v4);
+            System.out.println("Produit scalaire entre v1 et v4 : " + produitErreur);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erreur : " + e.getMessage());
+        }
+
     }
 
 }
