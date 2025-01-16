@@ -1,6 +1,7 @@
 package AlgLin;
 
 import java.io.File;
+import java.io.IOException;
 
 public class Vecteur extends Matrice {
 
@@ -18,7 +19,7 @@ public class Vecteur extends Matrice {
     }
 
     // Constructeur qui initialise le vecteur à partir d'un fichier
-    public Vecteur(String fichier) {
+    public Vecteur(String fichier) throws IOException {
         super(fichier);
         if (this.coefficient[0].length != 1) {
             throw new IllegalArgumentException("Le fichier ne définit pas un vecteur (une seule colonne attendue).");
@@ -50,11 +51,20 @@ public class Vecteur extends Matrice {
         return sb.toString();
     }
 
-    // Méthode statique pour calculer le produit scalaire de deux vecteurs
+    // Méthode statique pour calculer le produit scalaire de deux vecteurs avec vérification
     public static double produitScalaire(Vecteur v1, Vecteur v2) {
         if (v1.getTaille() != v2.getTaille()) {
-            throw new IllegalArgumentException("Les vecteurs n'ont pas la même taille !");
+            throw new IllegalArgumentException("Les vecteurs n'ont pas la meme taille !");
         }
+        double produit = 0.0;
+        for (int i = 0; i < v1.getTaille(); i++) {
+            produit += v1.getCoef(i) * v2.getCoef(i);
+        }
+        return produit;
+    }
+    
+    // Méthode statique pour calculer le produit scalaire de deux vecteurs sans vérification
+    public static double produitScalaireSansVerification(Vecteur v1, Vecteur v2) {
         double produit = 0.0;
         for (int i = 0; i < v1.getTaille(); i++) {
             produit += v1.getCoef(i) * v2.getCoef(i);
@@ -63,7 +73,7 @@ public class Vecteur extends Matrice {
     }
 
     // Méthode principale pour tester toutes les fonctionnalités
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // Test du constructeur avec tableau
         Vecteur v1 = new Vecteur(new double[]{1.0, 2.0, 3.0});
         System.out.println("Test du constructeur avec tableau :");
@@ -81,10 +91,10 @@ public class Vecteur extends Matrice {
         double produit = produitScalaire(v1, v2);
         System.out.println("Produit scalaire entre v1 et v2 : " + produit);
 
-        // Test du constructeur avec fichier (chemin à adapter selon votre système)
-        File fichier = new File("Vecteur.txt");
+        // Test du constructeur avec fichier 
+        File fichier = new File("vecteur.txt");
         if (fichier.exists()) {
-            Vecteur v3 = new Vecteur("Vecteur.txt");
+            Vecteur v3 = new Vecteur("vecteur.txt");
             System.out.println("Test du constructeur avec fichier :");
             System.out.println(v3);
         } else {
@@ -94,12 +104,18 @@ public class Vecteur extends Matrice {
         // Test de toString
         System.out.println("Test de toString :");
         System.out.println("Vecteur 1 :");
-        System.out.println(v1);
+        System.out.println(v1.toString());
 
         // Test d'erreur (vecteurs de tailles différentes)
         Vecteur v4 = new Vecteur(new double[]{1.0, 2.0});
-        System.out.println("Produit scalaire entre v1 et v4 (devrait générer une exception) :");
-        System.out.println(produitScalaire(v1, v4));
+        System.out.println("Produit scalaire entre v1 et v4 (devrait generer une exception) :");
+        try {
+        double produitErreur = produitScalaire(v1, v4);
+        System.out.println("Produit scalaire entre v1 et v4 : " + produitErreur);
+    } catch (IllegalArgumentException e) {
+        System.out.println("Erreur : " + e.getMessage());
+    }
+        
     }
 
 }
