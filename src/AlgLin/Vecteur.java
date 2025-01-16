@@ -38,6 +38,16 @@ public class Vecteur extends Matrice {
         super.remplaceCoef(index, 0, value);
     }
 
+    // Surcharge de la méthode toString pour afficher un vecteur
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < this.getTaille(); i++) {
+            sb.append(this.getCoef(i)).append("\n");
+        }
+        return sb.toString();
+    }
+
     // Méthode principale pour tester toutes les fonctionnalités
     public static void main(String[] args) {}
 
