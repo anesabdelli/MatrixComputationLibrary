@@ -55,7 +55,7 @@ public class Matrice {
 		return this.coefficient[ligne][colonne];
 	}
 	
-	public void remplacecoef(int ligne, int colonne, double value){
+	public void remplaceCoef(int ligne, int colonne, double value){
 		this.coefficient[ligne][colonne]=value;
 	}
 	
@@ -165,7 +165,7 @@ public class Matrice {
 				", "+c.nbColonne());
 		System.out.println("Coefficient (2,2) de la matrice b : "+b.getCoef(1, 1));
 		System.out.println("Nouvelle valeur de ce coefficient : 8");
-		b.remplacecoef(1, 1, 8);
+		b.remplaceCoef(1, 1, 8);
 		System.out.println("Vérification de la modification du coefficient");
 		System.out.println("Coefficient (2,2) de la matrice b : "+b.getCoef(1, 1));
 		System.out.println("Addition de 2 matrices : affichage des 2 matrices "+
