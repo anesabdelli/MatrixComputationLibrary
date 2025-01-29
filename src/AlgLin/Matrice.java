@@ -6,7 +6,10 @@ import java.util.*;
 public class Matrice {
 	/** Définir ici les attributs de la classe **/
 	protected double coefficient[][];
-	
+	/** Définition de l'epsilon numérique **/
+	public static final double EPSILON = 1.0E-06;
+
+
 	/** Définir ici les constructeur de la classe **/
 	Matrice (int nbligne, int nbcolonne){
 		this.coefficient = new double[nbligne][nbcolonne];
