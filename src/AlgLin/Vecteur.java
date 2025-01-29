@@ -18,6 +18,33 @@ public class Vecteur extends Matrice {
         }
     }
 
+    // Norme L1 : Somme des valeurs absolues
+    public double normeL1() {
+        double sum = 0;
+        for (int i = 0; i < getTaille(); i++) {
+            sum += Math.abs(getCoef(i));
+        }
+        return sum;
+    }
+
+    // Norme L2 : Racine de la somme des carrés
+    public double normeL2() {
+        double sum = 0;
+        for (int i = 0; i < getTaille(); i++) {
+            sum += Math.pow(getCoef(i), 2);
+        }
+        return Math.sqrt(sum);
+    }
+
+    // Norme Linfini : Valeur absolue maximale
+    public double normeLinf() {
+        double max = 0;
+        for (int i = 0; i < getTaille(); i++) {
+            max = Math.max(max, Math.abs(getCoef(i)));
+        }
+        return max;
+    }
+
     // Constructeur qui initialise le vecteur à partir d'un fichier
     public Vecteur(String fichier) throws IOException {
         super(fichier);
