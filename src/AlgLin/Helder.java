@@ -1,3 +1,4 @@
+/*
 package AlgLin;
 
 public class Helder extends SysLin {
@@ -159,3 +160,5 @@ public class Helder extends SysLin {
         return v;
     }
 }
+
+ */

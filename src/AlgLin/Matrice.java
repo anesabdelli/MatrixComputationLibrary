@@ -22,7 +22,6 @@ public class Matrice {
 	Matrice(String fichier){
 		try {
 			Scanner sc = new Scanner(new File(fichier));
-			//sc.useLocale(Locale.US);
 			int ligne = sc.nextInt();
 			int colonne = sc.nextInt();
 			this.coefficient = new double[ligne][colonne];
