@@ -142,13 +142,13 @@ public class Vecteur extends Matrice {
         v1.remplaceCoef(1, 10);
         System.out.println("Après remplacement : " + v1 + " (attendu : 1.0 10.0 3.0)\n");
 
-        /*
+
         // ================== Test des normes ==================
         System.out.println("===== Test des normes =====");
         System.out.println("Norme L1 de v1 : " + v1.normeL1() + " (attendu : 14.0)");
         System.out.println("Norme L2 de v1 : " + v1.normeL2() + " (attendu : ~10.488)");
         System.out.println("Norme Linf de v1 : " + v1.normeLinf() + " (attendu : 10.0)\n");
-         */
+
 
         // ================== Test des produits scalaires ==================
         System.out.println("===== Test des produits scalaires =====");

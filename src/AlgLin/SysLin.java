@@ -8,13 +8,13 @@ package AlgLin;
 public abstract class SysLin {
 
 	// Taille du système
-	private int ordre;
+	private static int ordre;
 
 	// Matrice représentant le système linéaire
-	protected Matrice matriceSystem;
+	protected static Matrice matriceSystem;
 
 	// Vecteur représentant le second membre du système
-	protected Vecteur secondMembre;
+	protected static Vecteur secondMembre;
 
 	/**
 	 * Constructeur pour initialiser un système linéaire avec une matrice et un second membre.
@@ -44,7 +44,7 @@ public abstract class SysLin {
 	 *
 	 * @return L'ordre du système linéaire.
 	 */
-	public int getOrdre() {
+	public static int getOrdre() {
 		return ordre;
 	}
 
@@ -53,7 +53,7 @@ public abstract class SysLin {
 	 *
 	 * @return La matrice du système.
 	 */
-	public Matrice getMatriceSystem() {
+	public static Matrice getMatriceSystem() {
 		return matriceSystem;
 	}
 
@@ -62,7 +62,7 @@ public abstract class SysLin {
 	 *
 	 * @return Le vecteur représentant le second membre du système.
 	 */
-	public Vecteur getSecondMembre() {
+	public static Vecteur getSecondMembre() {
 		return secondMembre;
 	}
 
