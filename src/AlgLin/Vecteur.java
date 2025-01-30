@@ -1,8 +1,5 @@
 package AlgLin;
 
-import java.io.File;
-import java.io.IOException;
-
 public class Vecteur extends Matrice {
 
     // Constructeur qui crée un vecteur avec une seule colonne et n lignes
@@ -111,37 +108,87 @@ public class Vecteur extends Matrice {
 
     // Méthode principale pour tester toutes les fonctionnalités
     public static void main(String[] args) {
+        System.out.println("*** Début des tests de la classe Vecteur ***\n");
+
+        // ================== Test des constructeurs ==================
+        System.out.println("===== Test des constructeurs =====");
+        // Constructeur avec tableau
+        Vecteur v1 = new Vecteur(new double[]{1, -2, 3});
+        System.out.println("[OK] Constructeur avec tableau : " + v1);
+
+        // Constructeur avec taille
+        Vecteur v2 = new Vecteur(3);
+        v2.remplaceCoef(0, 4);
+        v2.remplaceCoef(1, 5);
+        v2.remplaceCoef(2, 6);
+        System.out.println("[OK] Constructeur avec taille : " + v2);
+
+        // Constructeur avec fichier valide
         try {
-            // Test constructors
-            Vecteur v1 = new Vecteur(new double[]{1, 2, 3});
-            System.out.println("Vecteur v1: " + v1);
-
-            Vecteur v2 = new Vecteur(3);
-            v2.remplaceCoef(0, 4);
-            v2.remplaceCoef(1, 5);
-            v2.remplaceCoef(2, 6);
-            System.out.println("Vecteur v2: " + v2);
-
-            // Test dot product
-            double ps = produitScalaire(v1, v2);
-            System.out.println("Produit scalaire de v1 et v2: " + ps);
-
-            // Test with exception
-            Vecteur v3 = new Vecteur(2);
-            v3.remplaceCoef(0, 1);
-            v3.remplaceCoef(1, 2);
-            try {
-                System.out.println("Produit scalaire vérifié: " + produitScalaire(v1, v3));
-            } catch (Exception e) {
-                System.out.println("Exception attrapée: " + e.getMessage());
-            }
-
-            // Test file constructor
-            Vecteur v4 = new Vecteur("src/AlgLin/resources/vecteur1.txt");
-            System.out.println("Vecteur v4: " + v4);
-
+            Vecteur vFichier = new Vecteur("src/AlgLin/resources/vecteur1.txt");
+            System.out.println("[OK] Constructeur fichier valide : " + vFichier);
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("[ERREUR] Constructeur fichier valide : " + e.getMessage());
         }
+
+        // Constructeur avec fichier invalide
+        Vecteur vInvalide = new Vecteur("fichier_inexistant.txt");
+        System.out.println("[TEST] Constructeur fichier invalide : " + vInvalide + "\n");
+
+        // ================== Test des accesseurs ==================
+        System.out.println("===== Test des accesseurs =====");
+        System.out.println("Taille de v1 : " + v1.getTaille() + " (attendu : 3)");
+        System.out.println("Coeff [0] de v1 : " + v1.getCoef(0) + " (attendu : 1.0)");
+        v1.remplaceCoef(1, 10);
+        System.out.println("Après remplacement : " + v1 + " (attendu : 1.0 10.0 3.0)\n");
+
+        /*
+        // ================== Test des normes ==================
+        System.out.println("===== Test des normes =====");
+        System.out.println("Norme L1 de v1 : " + v1.normeL1() + " (attendu : 14.0)");
+        System.out.println("Norme L2 de v1 : " + v1.normeL2() + " (attendu : ~10.488)");
+        System.out.println("Norme Linf de v1 : " + v1.normeLinf() + " (attendu : 10.0)\n");
+         */
+
+        // ================== Test des produits scalaires ==================
+        System.out.println("===== Test des produits scalaires =====");
+        // Cas standard
+        try {
+            System.out.println("Produit scalaire validé : " + produitScalaire(v1, v2) + " (attendu : 52.0)");
+        } catch (Exception e) {
+            System.out.println("[ERREUR] " + e.getMessage());
+        }
+
+        // Cas avec vérification d'erreur
+        try {
+            Vecteur v3 = new Vecteur(2);
+            System.out.println("Produit scalaire incompatible : " + produitScalaire(v1, v3));
+        } catch (IllegalArgumentException e) {
+            System.out.println("[OK] Erreur détectée : " + e.getMessage());
+        }
+
+        // Cas sans vérification (comportement risqué)
+        try {
+            Vecteur v4 = new Vecteur(new double[]{1, 2});
+            System.out.println("Produit non vérifié : " + produitScalaireSansVerification(v1, v4));
+        } catch (Exception e) {
+            System.out.println("[ERREUR] " + e.getMessage());
+        }
+
+        // ================== Test cas particuliers ==================
+        System.out.println("\n===== Test cas particuliers =====");
+        // Vecteur vide
+        try {
+            Vecteur vVide = new Vecteur(0);
+            System.out.println("Test vecteur vide : " + vVide);
+        } catch (Exception e) {
+            System.out.println("[OK] Vecteur vide impossible : " + e.getMessage());
+        }
+
+        // Vecteur avec valeurs extrêmes
+        Vecteur vExtreme = new Vecteur(new double[]{Double.MAX_VALUE, -Double.MAX_VALUE});
+        System.out.println("Norme Linf extreme : " + vExtreme.normeLinf());
+
+        System.out.println("\n*** Fin des tests ***");
     }
 }

@@ -37,7 +37,7 @@ public class SysTriangInfUnite extends SysTriangInf {
         try {
             SysTriangInfUnite sys = new SysTriangInfUnite(m, v);
             Vecteur solution = sys.resolution();
-            System.out.println("Solution for lower triangular unit system:");
+            System.out.println("Solution du systeme triangulaire sup UNITE:");
             for (int i = 0; i < solution.getTaille(); i++) {
                 System.out.println("x" + i + " = " + solution.getCoef(i));
             }
