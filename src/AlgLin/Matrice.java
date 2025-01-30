@@ -18,18 +18,19 @@ public class Matrice {
 	Matrice(double[][] tableau){
 		coefficient = tableau;
 	}
-	
+
 	Matrice(String fichier){
 		try {
 			Scanner sc = new Scanner(new File(fichier));
+			//sc.useLocale(Locale.US);
 			int ligne = sc.nextInt();
 			int colonne = sc.nextInt();
 			this.coefficient = new double[ligne][colonne];
 			for(int i=0; i<ligne;i++)
 				for(int j=0; j< colonne; j++)
 					this.coefficient[i][j]=sc.nextDouble();
-			sc.close();	
-			
+			sc.close();
+
 		}
 		catch(FileNotFoundException e) {
 			System.out.println("Fichier absent");
@@ -159,7 +160,7 @@ public class Matrice {
 		double mat[][]= {{2,1},{0,1}};
 		Matrice a = new Matrice(mat);
 		System.out.println("construction d'une matrice par affectation d'un tableau :\n"+a);
-		Matrice b = new Matrice("matrice1.txt");
+		Matrice b = new Matrice("src/AlgLin/resources/matrice1.txt");
 		System.out.println("Construction d'une matrice par lecture d'un fichier :\n"+b);
 		Matrice c = new Matrice(2,2);
 		c.recopie(b);

@@ -18,6 +18,14 @@ public class Vecteur extends Matrice {
         }
     }
 
+    // Constructeur qui initialise le vecteur à partir d'un fichier
+    public Vecteur(String fichier) throws IOException {
+        super(fichier);
+        if (this.coefficient[0].length != 1) {
+            throw new IllegalArgumentException("Le fichier ne définit pas un vecteur (une seule colonne attendue).");
+        }
+    }
+
     // Norme L1 : Somme des valeurs absolues
     public double normeL1() {
         double sum = 0;
@@ -43,14 +51,6 @@ public class Vecteur extends Matrice {
             max = Math.max(max, Math.abs(getCoef(i)));
         }
         return max;
-    }
-
-    // Constructeur qui initialise le vecteur à partir d'un fichier
-    public Vecteur(String fichier) throws IOException {
-        super(fichier);
-        if (this.coefficient[0].length != 1) {
-            throw new IllegalArgumentException("Le fichier ne définit pas un vecteur (une seule colonne attendue).");
-        }
     }
 
     // Méthode pour obtenir la taille du vecteur
@@ -119,13 +119,13 @@ public class Vecteur extends Matrice {
         System.out.println("Produit scalaire entre v1 et v2 : " + produit);
 
         // Test du constructeur avec fichier 
-        File fichier = new File("vecteur.txt");
+        File fichier = new File("src/AlgLin/resources/vecteur1.txt");
         if (fichier.exists()) {
-            Vecteur v3 = new Vecteur("vecteur.txt");
+            Vecteur v3 = new Vecteur("src/AlgLin/resources/vecteur1.txt");
             System.out.println("Test du constructeur avec fichier :");
             System.out.println(v3);
         } else {
-            System.out.println("Le fichier 'vecteur.txt' n'existe pas.");
+            System.out.println("Le fichier 'vecteur1.txt' n'existe pas.");
         }
 
         // Test de toString
