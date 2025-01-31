@@ -33,28 +33,62 @@ public class SysTriangSup extends SysLin {
     }
 
     public static void main(String[] args) {
-        // Example of an upper triangular matrix and a vector
-        double mat[][] = {
-            {2, 3, 1},
-            {0, 3, 2},
-            {0, 0, 4}
-        };
-        Matrice m = new Matrice(mat);
-        Vecteur v = new Vecteur(new double[]{5.0, 6.0, 7.0});
-
         try {
-            // Create an instance of SysTriangSup and solve the system
-            SysTriangSup sys = new SysTriangSup(m, v);
-            Vecteur solution = sys.resolution();
+            // Matrice triangulaire supérieure et second membre
+            double[][] matData = {{2, 3, 1}, {0, 3, 2}, {0, 0, 4}};
+            Matrice mat = new Matrice(matData);
+            Vecteur b = new Vecteur(new double[]{5.0, 6.0, 7.0});
 
-            // Display the solution
-            System.out.println("Solution du système triangulaire supérieur :");
-            for (int i = 0; i < solution.getTaille(); i++) {
-                System.out.println("x" + i + " = " + solution.getCoef(i));
+            // Afficher la matrice et le second membre
+            System.out.println("Matrice du système :");
+            System.out.println(mat);
+            System.out.println("Second membre b :");
+            System.out.println(b);
+
+            // Créer une copie de la matrice et du second membre
+            Matrice matCopie = new Matrice(mat.nbLigne(), mat.nbColonne());
+            matCopie.recopie(mat);
+            Vecteur bCopie = new Vecteur(b.getTaille());
+            bCopie.recopie(b);
+
+            // Résoudre le système
+            SysTriangSup sys = new SysTriangSup(matCopie, bCopie);
+            Vecteur x = sys.resolution();
+
+            // Afficher la solution
+            System.out.println("Solution x :");
+            System.out.println(x);
+
+            // Calculer Ax - b
+            Vecteur Ax = new Vecteur(b.getTaille());
+            for (int i = 0; i < b.getTaille(); i++) {
+                double sum = 0.0;
+                for (int j = 0; j < b.getTaille(); j++) {
+                    sum += mat.getCoef(i, j) * x.getCoef(j);
+                }
+                Ax.remplaceCoef(i, sum);
             }
-        } catch (IrregularSysLinException e) {
-            // Handle exceptions
-            System.out.println(e);
+
+            // Calculer le résidu Ax - b
+            Vecteur residu = new Vecteur(b.getTaille());
+            for (int i = 0; i < residu.getTaille(); i++) {
+                residu.remplaceCoef(i, Ax.getCoef(i) - b.getCoef(i));
+            }
+
+            // Afficher le résidu et sa norme
+            System.out.println("Résidu Ax - b :");
+            System.out.println(residu);
+            double norme = residu.normeLinf();
+            System.out.println("Norme du résidu (L∞) : " + norme);
+
+            // Vérifier la norme du résidu
+            if (norme < Matrice.EPSILON) {
+                System.out.println("Test SysTriangSup réussi !");
+            } else {
+                System.out.println("Test SysTriangSup échoué.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
