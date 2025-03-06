@@ -1,23 +1,23 @@
 package AlgLin;
 
 /**
- * Exception thrown when a linear system is found to be irregular during resolution.
+ * Exception levée lorsqu'un système linéaire est détecté comme irrégulier lors de la résolution.
  */
 public class IrregularSysLinException extends Exception {
     /**
-     * Constructs a new IrregularSysLinException with a custom message.
-     * @param message Custom message describing the irregularity.
+     * Construit une nouvelle exception IrregularSysLinException avec un message personnalisé.
+     * @param message Message personnalisé décrivant l'irrégularité.
      */
     public IrregularSysLinException(String message) {
         super(message);
     }
-    
+
     /**
-     * Returns a string representation of the exception.
-     * @return The irregular system message.
+     * Retourne une représentation textuelle de l'exception.
+     * @return Le message indiquant l'irrégularité du système.
      */
     @Override
     public String toString() {
-        return "IrregularSysLinException: " + super.getMessage();
+        return "IrregularSysLinException : " + super.getMessage();
     }
 }

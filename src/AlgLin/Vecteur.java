@@ -15,6 +15,17 @@ public class Vecteur extends Matrice {
         }
     }
 
+    // Constructeur qui initialise le vecteur à partir d'un fichier
+    public Vecteur(String fichier) {
+        super(fichier);
+        if (coefficient != null) {
+            if (this.nbColonne() != 1) {
+                System.err.println("Erreur : Le fichier ne contient pas un vecteur valide (nombre de colonnes != 1).");
+                coefficient = null;
+            }
+        }
+    }
+
     // Norme L1 : Somme des valeurs absolues
     public double normeL1() {
         double sum = 0;
@@ -40,17 +51,6 @@ public class Vecteur extends Matrice {
             max = Math.max(max, Math.abs(getCoef(i)));
         }
         return max;
-    }
-
-    // Constructeur qui initialise le vecteur à partir d'un fichier
-    public Vecteur(String fichier) {
-        super(fichier);
-        if (coefficient != null) {
-            if (this.nbColonne() != 1) {
-                System.err.println("Erreur : Le fichier ne contient pas un vecteur valide (nombre de colonnes != 1).");
-                coefficient = null;
-            }
-        }
     }
 
     // Méthode pour obtenir la taille du vecteur
